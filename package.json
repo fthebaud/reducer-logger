@@ -1,0 +1,31 @@
+{
+  "name": "@fthebaud/reducer-logger",
+  "version": "1.0.0",
+  "description": "Simple logger for reducer functions",
+  "main": "dist/index.js",
+  "repository": "https://github.com/fthebaud/reducer-logger",
+  "author": "fthebaud",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/deep-diff": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.20.0",
+    "typescript": "^4.1.5"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "deep-diff": "^1.0.2"
+  },
+  "keywords": [
+    "reducer",
+    "logger",
+    "react",
+    "useReducer",
+    "diff",
+    "typescript"
+  ]
+}
