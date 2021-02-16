@@ -97,7 +97,7 @@ function render(diff: Diff<any>): any[] {
 export default function renderDiff<S>(state: S, newState: S): void {
   const difference = diff(state, newState);
 
-  console.groupCollapsed('diff');
+  console.group('diff');
 
   if (difference) {
     difference.forEach((diff: Diff<any>) => {
