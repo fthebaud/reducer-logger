@@ -1,6 +1,6 @@
-import { diff } from "deep-diff";
-import { Reducer, Action, Options } from "./types";
-import diffLogger from "./diff";
+import { Reducer, Action, Options } from './types';
+import renderDiff from './diff';
+import { lightblue, green, grey } from './colors';
 
 const defaultOptions: Options = {
   disabled: false,
@@ -13,41 +13,50 @@ function wrapReducer<S, A extends Action>(
   if (options.disabled) {
     return reducer;
   }
+
   return (state: S, action: A): S => {
     const t0 = performance.now();
     const newState = reducer(state, action);
-    const duration = (performance.now() - t0).toFixed(3);
+    const duration = performance.now() - t0;
 
-    const difference = diff(state, newState);
-
-    console.groupCollapsed(
-      `%caction %c${
-        action.type
-      } %c@ ${new Date().toLocaleTimeString()} (in ${duration} ms)`,
-      "color: gray; font-weight: lighter;",
-      "color: dark; font-weight: bolder;",
-      "color: gray; font-weight: lighter;"
-    );
-    console.debug(
-      "%caction     %o",
-      "color: #03A9F4; font-weight: bolder;",
-      action
-    );
-    console.debug(
-      "%cprev state %o",
-      "color: #9E9E9E; font-weight: bolder;",
-      state
-    );
-    console.debug(
-      "%cnext state %o",
-      "color: #4CAF50; font-weight: bolder;",
-      newState
-    );
-    diffLogger(difference);
-    console.groupEnd();
+    renderLog(action, state, newState, duration);
 
     return newState;
   };
+}
+
+function renderLog<S, A extends Action>(
+  action: A,
+  state: S,
+  newState: S,
+  duration: number
+): void {
+  console.groupCollapsed(
+    `%caction %c${
+      action.type
+    } %c@ ${new Date().toLocaleTimeString()} (in ${duration.toFixed(3)} ms)`,
+    'color: gray; font-weight: lighter;',
+    'color: dark; font-weight: bolder;',
+    'color: gray; font-weight: lighter;'
+  );
+
+  console.log(
+    '%caction     %o',
+    `color: ${lightblue}; font-weight: bolder;`,
+    action
+  );
+
+  console.log('%cprev state %o', `color: ${grey}; font-weight: bolder;`, state);
+
+  console.log(
+    '%cnext state %o',
+    `color: ${green}; font-weight: bolder;`,
+    newState
+  );
+
+  renderDiff<S>(state, newState);
+
+  console.groupEnd();
 }
 
 export { wrapReducer };

@@ -1,10 +1,8 @@
 # Reducer Logger
 
-A simple logger for reducer functions, inspired by the middleware [redux-logger](https://github.com/LogRocket/redux-logger).
+A simple typescript logger for reducer functions, inspired by [redux-logger](https://github.com/LogRocket/redux-logger).
 
-This logger provides a diff of the previous state / next state via [deep-diff](https://github.com/flitbit/diff).
-
-Written in typescript.
+Provides a diff of the previous state / next state via [deep-diff](https://github.com/flitbit/diff).
 
 ![screenshot of reducer logger](screenshot.png)
 
@@ -13,17 +11,29 @@ Written in typescript.
 ```bash
 $ npm i --save @fthebaud/reducer-logger
 # or
-$ yarn add @fthebaud/reducer-loggerreducer-logger
+$ yarn add @fthebaud/reducer-logger
 ```
 
 ## Usage
 
 Just wrapp the reducer using the wrapReducer function.
 
-Second parameter is an optionnal configuration object.
+Second parameter is an optional configuration object.
 
 ```js
-//TODO
+import { wrapReducer } from 'reducer-logger';
+
+const reducer = (state: State, action: Action): State => {
+  // Reducer code
+};
+
+export const reducerWithLogs = wrapReducer<State, Action>(
+    reducer,
+    {
+      disabled: process.env.NODE_ENV === 'production',
+    }
+);
+
 ```
 
 ## Options

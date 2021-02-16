@@ -1,6 +1,6 @@
 {
   "name": "@fthebaud/reducer-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple logger for reducer functions",
   "main": "dist/index.js",
   "repository": "https://github.com/fthebaud/reducer-logger",
@@ -11,6 +11,8 @@
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
     "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "prettier": "^2.2.1",
     "typescript": "^4.1.5"
   },
   "scripts": {
