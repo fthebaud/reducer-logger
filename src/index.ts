@@ -4,13 +4,16 @@ import { lightblue, green, grey } from './colors';
 
 const defaultOptions: Options = {
   disabled: false,
+  displayName: '',
 };
 
 function wrapReducer<S, A extends Action>(
   reducer: Reducer<S, A>,
   options: Options | undefined = defaultOptions
 ): Reducer<S, A> {
-  if (options.disabled) {
+  const { disabled, displayName } = options;
+
+  if (disabled) {
     return reducer;
   }
 
@@ -19,7 +22,7 @@ function wrapReducer<S, A extends Action>(
     const newState = reducer(state, action);
     const duration = performance.now() - t0;
 
-    renderLog(action, state, newState, duration);
+    renderLog(action, state, newState, duration, displayName);
 
     return newState;
   };
@@ -29,12 +32,16 @@ function renderLog<S, A extends Action>(
   action: A,
   state: S,
   newState: S,
-  duration: number
+  duration: number,
+  displayName?: string
 ): void {
+  const prefix = displayName ? `[${displayName}] ` : '';
+
   console.groupCollapsed(
-    `%caction %c${
+    `%c${prefix}%caction %c${
       action.type
     } %c@ ${new Date().toLocaleTimeString()} (in ${duration.toFixed(3)} ms)`,
+    'color: dark; font-weight: bolder;',
     'color: gray; font-weight: lighter;',
     'color: dark; font-weight: bolder;',
     'color: gray; font-weight: lighter;'

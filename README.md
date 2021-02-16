@@ -21,7 +21,7 @@ Just wrapp the reducer using the wrapReducer function.
 Second parameter is an optional configuration object.
 
 ```js
-import { wrapReducer } from 'reducer-logger';
+import { wrapReducer } from '@fthebaud/reducer-logger';
 
 const reducer = (state: State, action: Action): State => {
   // Reducer code
@@ -31,6 +31,7 @@ export const reducerWithLogs = wrapReducer<State, Action>(
     reducer,
     {
       disabled: process.env.NODE_ENV === 'production',
+      displayName: 'reducer #1',
     }
 );
 
@@ -38,6 +39,7 @@ export const reducerWithLogs = wrapReducer<State, Action>(
 
 ## Options
 
-| Name     | type    | default |
-| -------- | ------- | ------- |
-| disabled | boolean | false   |
+| Name        | type    | default |
+| ----------- | ------- | ------- |
+| disabled    | boolean | false   |
+| displayName | string  | ''      |

@@ -1,6 +1,6 @@
 {
   "name": "@fthebaud/reducer-logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple logger for reducer functions",
   "main": "dist/index.js",
   "repository": "https://github.com/fthebaud/reducer-logger",

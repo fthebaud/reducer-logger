@@ -8,7 +8,8 @@ interface Reducer<S, A> {
 }
 
 export type Options = {
-  disabled: boolean;
+  disabled?: boolean;
+  displayName?: string;
 };
 
 export { Reducer, Action };
